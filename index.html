@@ -996,7 +996,58 @@ img {
             </div>
         </div>
     </footer>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const header = document.querySelector('.site-header');
+        const mobileToggle = document.querySelector('.mobile-menu-toggle');
+        const nav = document.querySelector('.main-nav');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        if (mobileToggle && nav) {
+            mobileToggle.addEventListener('click', () => {
+                if(nav.style.display === 'flex') {
+                    nav.style.display = '';
+                    nav.style.flexDirection = '';
+                    nav.style.position = '';
+                    nav.style.backgroundColor = '';
+                } else {
+                    nav.style.display = 'flex';
+                    nav.style.flexDirection = 'column';
+                    nav.style.position = 'absolute';
+                    nav.style.top = '100%';
+                    nav.style.left = '0';
+                    nav.style.width = '100%';
+                    nav.style.backgroundColor = 'rgba(253, 251, 247, 0.95)';
+                    nav.style.padding = '2rem';
+                }
+            });
+        }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-up');
+                observer.unobserve(entry.target);
+            }
+        });
+    });
+
+    document.querySelectorAll('.portfolio-item, .service-box').forEach((el) => {
+        el.style.opacity = '0';
+        observer.observe(el);
+    });
+</script>
+</body>
 </html>
+
 
 
 
