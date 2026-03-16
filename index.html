@@ -1,438 +1,1003 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Capabilities - Element Building Co.</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    /* Reset & Base Variables */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Building Co | Custom Homes & Remodels in Boise, Idaho</title>
+    <meta name="description" content="Element Building Co specializes in high-end custom homes, comprehensive remodels, and architectural builds in Boise, Idaho and the Treasure Valley.">
     
-    :root {
-      --color-bg: #F4F5F6;
-      --color-surface: #FFFFFF;
-      --color-surface-dark: #2B3A4A;
-      --color-surface-accent: #E8ECEF;
-      --color-text: #1A1A1A;
-      --color-text-light: #66707A;
-      --color-text-dark-bg: #FFFFFF;
-      --color-text-dark-muted: rgba(255, 255, 255, 0.7);
-      
-      --font-heading: 'Cormorant Garamond', serif;
-      --font-body: 'Inter', sans-serif;
-      
-      --spacing-sm: 1rem;
-      --spacing-md: 2rem;
-      --spacing-lg: 4rem;
-      --spacing-xl: 8rem;
-    }
-
-    body {
-      font-family: var(--font-body);
-      background-color: var(--color-bg);
-      color: var(--color-text);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      line-height: 1.6;
-    }
-
-    /* Capabilities Section */
-    .capabilities-section {
-      position: relative;
-      padding: var(--spacing-xl) 5vw;
-      overflow: hidden;
-      min-height: 100vh;
-    }
-
-    /* Subtle Architectural Grid Background */
-    .capabilities-section::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-        linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
-      background-size: 8.333% 8.333%; /* 12-column grid visual */
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* Noise Texture */
-    .noise-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.03;
-      background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-    }
-
-    .capabilities-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .capabilities__header {
-      margin-bottom: var(--spacing-xl);
-      max-width: 700px;
-    }
-
-    .capabilities__subtitle {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.25em;
-      color: var(--color-text-light);
-      margin-bottom: 1.5rem;
-      display: block;
-      font-weight: 500;
-    }
-
-    .capabilities__title {
-      font-family: var(--font-heading);
-      font-size: clamp(3rem, 5vw, 4.5rem);
-      font-weight: 300;
-      line-height: 1.1;
-      color: var(--color-text);
-      letter-spacing: -0.02em;
-    }
-
-    /* Layout Grid */
-    .grid-layout {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 2rem;
-      align-items: start;
-    }
-
-    .card {
-      position: relative;
-      display: flex;
-    }
-
-    .img-wrapper {
-      position: relative;
-      overflow: hidden;
-      background-color: #d1d4d6; 
-    }
-
-    .img-wrapper img {
-      width: 100%;
-      height: 120%; /* Expanded for parallax coverage */
-      object-fit: cover;
-      transform-origin: center;
-      margin-top: -10%; 
-    }
-
-    .card-content {
-      position: relative;
-    }
-
-    .card-number {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: var(--color-text-light);
-      display: block;
-      margin-bottom: 2rem;
-    }
-
-    .card-number::before {
-      content: "";
-      display: inline-block;
-      width: 20px;
-      height: 1px;
-      background-color: currentColor;
-      vertical-align: middle;
-      margin-right: 10px;
-      opacity: 0.5;
-    }
-
-    .card-title {
-      font-family: var(--font-heading);
-      font-size: clamp(2rem, 3.5vw, 2.5rem);
-      font-weight: 400;
-      margin-bottom: 1rem;
-      line-height: 1.2;
-    }
-
-    .card-text {
-      font-family: var(--font-body);
-      font-size: 1rem;
-      color: var(--color-text-light);
-      line-height: 1.7;
-      max-width: 400px;
-    }
-
-    /* Pillar 01: Personalized Design */
-    .card--1 {
-      grid-column: 1 / 7;
-      grid-row: 1 / 4;
-      flex-direction: column;
-    }
-
-    .card--1 .img-wrapper {
-      aspect-ratio: 4/5;
-      width: 100%;
-    }
-
-    .card--1 .card-content {
-      background: var(--color-surface);
-      padding: var(--spacing-lg);
-      margin-top: -15%;
-      margin-left: 10%;
-      width: 85%;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.04);
-      z-index: 2;
-    }
-
-    /* Pillar 02: Transparent Pricing */
-    .card--2 {
-      grid-column: 8 / 13;
-      grid-row: 1 / 2;
-      background: var(--color-surface-dark);
-      color: var(--color-text-dark-bg);
-      padding: var(--spacing-lg);
-      margin-top: 5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .card--2 .card-number {
-      color: var(--color-text-dark-muted);
-    }
-
-    .card--2 .card-text {
-      color: var(--color-text-dark-muted);
-    }
-
-    /* Pillar 03: Consistent Communication */
-    .card--3 {
-      grid-column: 7 / 13;
-      grid-row: 2 / 4;
-      background: var(--color-surface-accent);
-      margin-top: -3rem; 
-      z-index: 1;
-      display: flex;
-      flex-direction: row;
-      align-items: stretch;
-    }
-
-    .card--3 .img-wrapper {
-      width: 45%;
-    }
-
-    .card--3 .card-content {
-      width: 55%;
-      padding: var(--spacing-lg) 2.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    /* Pillar 04: Exceptional Craftsmanship */
-    .card--4 {
-      grid-column: 1 / 13;
-      margin-top: var(--spacing-lg);
-      display: grid;
-      grid-template-columns: 5fr 7fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .card--4 .img-wrapper {
-      aspect-ratio: 16/10;
-      width: 100%;
-      order: 2;
-    }
-
-    .card--4 .card-content {
-      order: 1;
-      padding-left: 5vw;
-    }
-
-    .card--4 .card-text {
-      max-width: 500px;
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 1024px) {
-      .capabilities-section {
-        padding: var(--spacing-lg) 5vw;
-      }
-      .grid-layout {
-        display: flex;
-        flex-direction: column;
-        gap: 4rem;
-      }
-      .capabilities-section::before {
-        display: none;
-      }
-      .card--1 .card-content {
-        margin: -15% auto 0;
-        width: 90%;
-        padding: var(--spacing-md);
-      }
-      .card--2 {
-        margin-top: 0;
-        padding: var(--spacing-md);
-      }
-      .card--3 {
-        margin-top: 0;
-        flex-direction: column;
-      }
-      .card--3 .img-wrapper {
-         width: 100%;
-         aspect-ratio: 16/9;
-      }
-      .card--3 .card-content {
-        width: 100%;
-        padding: var(--spacing-md);
-      }
-      .card--4 {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        margin-top: 2rem;
-      }
-      .card--4 .img-wrapper {
-        order: 1;
-      }
-      .card--4 .card-content {
-        order: 2;
-        padding-left: 0;
-      }
-    }
+    <!-- Google Fonts: Outfit for Headers, Lora for body text (elegant pairing) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    /* Reveal Element Baseline */
-    .reveal-elem {
-      visibility: hidden;
-    }
-  </style>
+    <!-- Custom CSS -->
+    <style>
+/* 
+  Element Building Co - Base Styles 
+  CSS organized to mirror Elementor's UI structure
+*/
+
+/* --- 1. Global Variables (Elementor Global Settings) --- */
+:root {
+  /* Colors */
+  --color-bg: #FDFBF7; /* Warm off-white */
+  --color-text-main: #1A1A1A; /* Soft black/charcoal */
+  --color-text-muted: #5A5A5A;
+  --color-accent: #8C6239; /* Warm Wood/Bronze */
+  --color-accent-hover: #75512e;
+  --color-white: #FFFFFF;
+  --color-border: #E5E5E5;
+
+  /* Typography */
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Lora', serif;
+
+  /* Spacing (mimicking Elementor padding/margin controls) */
+  --spacing-section: 100px;
+  --spacing-container: 2rem;
+  
+  /* Layout Transitions */
+  --transition-speed: 0.3s;
+  --transition-ease: ease-in-out;
+}
+
+/* --- 2. CSS Reset & Base Rules --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text-main);
+  background-color: var(--color-bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--color-text-main);
+}
+
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600; letter-spacing: -0.02em; }
+h2 { font-size: clamp(2rem, 4vw, 3rem); }
+h3 { font-size: 1.5rem; }
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-speed) var(--transition-ease);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- 3. Utility Classes (Elementor Containers) --- */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-container);
+}
+
+.section {
+  padding: var(--spacing-section) 0;
+}
+
+/* Buttons (Elementor Button Widget) */
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  transition: all var(--transition-speed) var(--transition-ease);
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-hover);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-white);
+  border: 1px solid var(--color-white);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-white);
+  color: var(--color-text-main);
+}
+
+/* --- 4. Component Styles --- */
+
+/* Header */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  padding: 20px 0;
+  z-index: 1000;
+  transition: background-color 0.4s ease, padding 0.4s ease;
+}
+
+.site-header.scrolled {
+  background-color: rgba(253, 251, 247, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 15px 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.site-header.scrolled .logo a,
+.site-header.scrolled .nav-links a {
+  color: var(--color-text-main);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-white);
+}
+
+.logo span {
+  color: var(--color-accent);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-white);
+}
+
+.nav-links a:hover {
+  color: var(--color-accent);
+}
+
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  background-image: url('../https://element-building-co-2026.netlify.app/assets/images/hero-bg-placeholder.png'); /* We will generate this */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Parallax effect */
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+}
+
+.hero-container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content {
+  max-width: 600px;
+  color: var(--color-white);
+}
+
+.hero-content h1 {
+  color: var(--color-white);
+  margin-bottom: 1.5rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Section Headers */
+.section-header {
+  margin-bottom: 4rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.subtitle {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.section-header h2 {
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+/* Services Section */
+.services-section {
+  background-color: var(--color-white);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.service-box {
+  padding: 3rem 2rem;
+  background-color: var(--color-bg);
+  border-radius: 4px;
+  transition: transform var(--transition-speed) var(--transition-ease), box-shadow var(--transition-speed) var(--transition-ease);
+  border: 1px solid transparent;
+}
+
+.service-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  border-color: var(--color-border);
+}
+
+.service-icon {
+  margin-bottom: 1.5rem;
+  color: var(--color-accent);
+}
+
+.service-box h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.service-box p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+/* Portfolio Section */
+.portfolio-section {
+  background-color: var(--color-bg);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.portfolio-img {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+.portfolio-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.portfolio-item:hover .portfolio-img img {
+  transform: scale(1.05);
+}
+
+.portfolio-desc {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  color: var(--color-white);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.portfolio-item:hover .portfolio-desc {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.portfolio-desc h3 {
+  color: var(--color-white);
+  margin-bottom: 0.2rem;
+  font-size: 1.25rem;
+}
+
+.portfolio-desc p {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-white);
+  opacity: 0.8;
+  margin-bottom: 0;
+}
+
+/* About Section */
+.about-section {
+  background-color: var(--color-white);
+  overflow: hidden; /* For badge positioning */
+}
+
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-content h2 {
+  margin-bottom: 1.5rem;
+}
+
+.about-content p {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+.trust-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.stat-num {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  display: block;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.about-image-wrapper {
+  position: relative;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
+}
+
+.about-image {
+  border-radius: 4px;
+  box-shadow: -20px 20px 0 var(--color-bg); /* Simple CSS shadow easily done in Elementor box shadow */
+}
+
+.experience-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.experience-badge span {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.experience-badge strong {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Contact Section */
+.contact-section {
+  background-color: var(--color-bg);
+  padding: 6rem 0; /* extra padding to anchor footer */
+}
+
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+}
+
+.contact-info p {
+  color: var(--color-text-muted);
+  margin-bottom: 3rem;
+}
+
+.contact-details {
+  list-style: none;
+}
+
+.contact-details li {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-details strong {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+  margin-bottom: 0.3rem;
+}
+
+.contact-details span {
+  font-size: 1.1rem;
+  color: var(--color-text-main);
+}
+
+.contact-form-wrapper {
+  background-color: var(--color-white);
+  padding: 3rem;
+  border-radius: 4px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text-main);
+  background-color: var(--color-bg);
+  transition: border-color var(--transition-speed);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.submit-btn {
+  width: 100%;
+}
+
+/* Footer Section */
+.site-footer {
+  background-color: var(--color-text-main);
+  color: var(--color-white);
+  padding: 4rem 0 2rem;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer-brand p {
+  margin-top: 1rem;
+  color: var(--color-text-muted);
+  color: rgba(255,255,255,0.6);
+}
+
+.footer-links h4,
+.footer-social h4 {
+  color: var(--color-white);
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+  color: rgba(255,255,255,0.7);
+}
+
+.footer-links a:hover {
+  color: var(--color-accent);
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all var(--transition-speed);
+}
+
+.social-icons a:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.footer-bottom {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* Animations (Mimicking Elementor Motion Effects) */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .about-image-wrapper {
+    order: -1; /* image on top for tablet/mobile */
+    padding-right: 0;
+  }
+  
+  .experience-badge {
+    padding: 1.5rem;
+  }
+  
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  .nav-links, .main-nav .btn {
+    display: none; /* Mobile menu toggle logic needed */
+  }
+  
+  .mobile-menu-toggle {
+    display: block;
+  }
+  
+  .hamburger {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--color-white);
+    position: relative;
+    transition: background-color 0.3s;
+  }
+  
+  .hamburger::before, .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-white);
+    left: 0;
+    transition: transform 0.3s, top 0.3s;
+  }
+  
+  .hamburger::before { top: -8px; }
+  .hamburger::after { top: 8px; }
+  
+  .site-header.scrolled .hamburger,
+  .site-header.scrolled .hamburger::before,
+  .site-header.scrolled .hamburger::after {
+    background-color: var(--color-text-main);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --spacing-section: 60px;
+  }
+  
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  
+  .hero-actions {
+    flex-direction: column;
+  }
+  
+  .btn {
+    text-align: center;
+  }
+  
+  .trust-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+
+
+
+    </style>
 </head>
 <body>
 
-  <div class="noise-overlay"></div>
-
-  <section class="capabilities-section" id="process">
-    <div class="capabilities-container">
-      
-      <header class="capabilities__header">
-        <span class="capabilities__subtitle reveal-elem">Process & Pillars</span>
-        <h2 class="capabilities__title reveal-elem">Thoughtful design meets transparent execution.</h2>
-      </header>
-
-      <div class="grid-layout">
-        
-        <!-- Pillar 01: Personalized Design -->
-        <article class="card card--1 reveal-elem">
-          <div class="img-wrapper">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Personalized custom home exterior design">
-          </div>
-          <div class="card-content">
-            <span class="card-number">01</span>
-            <h3 class="card-title">Personalized Design</h3>
-            <p class="card-text">Your home should reflect your lifestyle, taste, and long-term needs.</p>
-          </div>
-        </article>
-
-        <!-- Pillar 02: Transparent Pricing -->
-        <article class="card card--2 reveal-elem">
-          <div class="card-content">
-            <span class="card-number">02</span>
-            <h3 class="card-title">Transparent Pricing</h3>
-            <p class="card-text">Clear budgets and planning keep your project predictable.</p>
-          </div>
-        </article>
-
-        <!-- Pillar 03: Consistent Communication -->
-        <article class="card card--3 reveal-elem">
-          <div class="img-wrapper">
-            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Consistent communication during architectural planning">
-          </div>
-          <div class="card-content">
-            <span class="card-number">03</span>
-            <h3 class="card-title">Consistent Communication</h3>
-            <p class="card-text">You'll always know what's happening during your build.</p>
-          </div>
-        </article>
-
-      </div>
-
-      <!-- Pillar 04: Exceptional Craftsmanship -->
-      <article class="card card--4 reveal-elem">
-        <div class="card-content">
-          <span class="card-number">04</span>
-          <h3 class="card-title">Exceptional Craftsmanship</h3>
-          <p class="card-text">Skilled trades and quality materials in every home.</p>
+    <!-- Header Section -->
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="#">Element<span>.</span></a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="#services">Expertise</a></li>
+                    <li><a href="#portfolio">Our Work</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <a href="#contact" class="btn btn-primary">Contact Us</a>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+            </button>
         </div>
-        <div class="img-wrapper">
-            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" alt="Exceptional craftsmanship shown in modern living space">
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="container hero-container">
+            <div class="hero-content fade-in-up">
+                <h1>Crafting Idaho's Finest Homes.</h1>
+                <p>Exceptional custom builds and visionary renovations tailored to the Treasure Valley lifestyle.</p>
+                <div class="hero-actions">
+                    <a href="#portfolio" class="btn btn-primary">View Our Projects</a>
+                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                </div>
+            </div>
         </div>
-      </article>
+    </section>
 
-    </div>
-  </section>
+    <!-- Services Section -->
+    <section class="section services-section" id="services">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="subtitle">Our Expertise</span>
+                <h2>What We Build</h2>
+            </div>
+            <div class="services-grid">
+                <!-- Service Box 1 -->
+                <div class="service-box">
+                    <div class="service-icon">
+                        <!-- SVG Placeholder for Elementor Icon -->
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M9 8h1"></path><path d="M9 12h1"></path><path d="M9 16h1"></path><path d="M14 8h1"></path><path d="M14 12h1"></path><path d="M14 16h1"></path><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path></svg>
+                    </div>
+                    <h3>Custom Homes</h3>
+                    <p>From conceptual design to final walkthrough, we build unique architectural masterpieces that reflect your vision and the natural beauty of Idaho.</p>
+                </div>
+                <!-- Service Box 2 -->
+                <div class="service-box">
+                    <div class="service-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                    </div>
+                    <h3>Luxury Remodels</h3>
+                    <p>Transform your existing space. We specialize in comprehensive structural and aesthetic renovations that breathe new life into older homes.</p>
+                </div>
+                <!-- Service Box 3 -->
+                <div class="service-box">
+                    <div class="service-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 19 8.4 19 22 5 22 5 8.4 12 2"></polygon><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    </div>
+                    <h3>Architectural Design</h3>
+                    <p>Partnering with the region's best architects, we ensure seamless transition from blueprints to framing, optimizing for both beauty and structural integrity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      gsap.registerPlugin(ScrollTrigger);
+    <!-- Portfolio Section -->
+    <section class="section portfolio-section" id="portfolio">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="subtitle">Latest Work</span>
+                <h2>Featured Projects</h2>
+            </div>
+            <div class="portfolio-grid">
+                <!-- Project 1 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="https://element-building-co-2026.netlify.app/assets/images/portfolio-1.png" alt="Modern Kitchen Remodel">
+                    </div>
+                    <div class="portfolio-desc">
+                        <h3>The Foothills Kitchen</h3>
+                        <p>Interior Remodel</p>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="https://element-building-co-2026.netlify.app/assets/images/portfolio-2.png" alt="Mountain Modern Living Room">
+                    </div>
+                    <div class="portfolio-desc">
+                        <h3>Table Rock Residence</h3>
+                        <p>Custom New Build</p>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <img src="https://element-building-co-2026.netlify.app/assets/images/portfolio-3.png" alt="Custom Timber Frame Exterior">
+                    </div>
+                    <div class="portfolio-desc">
+                        <h3>North End Retreat</h3>
+                        <p>Historic Renovation & Addition</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top: 3rem;">
+                <a href="#" class="btn btn-secondary" style="border-color: var(--color-text-main); color: var(--color-text-main);">View Full Portfolio</a>
+            </div>
+        </div>
+    </section>
 
-      // Make elements visible right before GSAP takes over
-      gsap.set(".reveal-elem", { visibility: "visible" });
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+        <div class="container about-container">
+            <div class="about-content">
+                <span class="subtitle">Who We Are</span>
+                <h2>Building Legacies in the Treasure Valley</h2>
+                <p>At Element Building Co, we don't just build houses; we craft environments that elevate the everyday. Based in Boise, Idaho, our team brings decades of combined experience in luxury home building and architectural renovations.</p>
+                <p>We pride ourselves on transparent communication, impeccable craftsmanship, and a deep respect for the natural beauty of the Pacific Northwest. Every project we undertake is an opportunity to push the boundaries of design while ensuring timeless structural integrity.</p>
+                <div class="trust-stats">
+                    <div class="stat">
+                        <span class="stat-num">15+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-num">100%</span>
+                        <span class="stat-label">Client Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image-wrapper fade-in-up">
+                <img src="https://element-building-co-2026.netlify.app/assets/images/about.png" alt="Element Building Co - Modern Entryway" class="about-image">
+                <div class="experience-badge">
+                    <span>Award Winning</span>
+                    <strong>Builder</strong>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      // Header Animation
-      gsap.from(".capabilities__header > *", {
-        y: 40,
-        opacity: 0,
-        duration: 1.2,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".capabilities__header",
-          start: "top 85%",
-        }
-      });
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+        <div class="container contact-container">
+            <div class="contact-info">
+                <span class="subtitle">Get in Touch</span>
+                <h2>Start Your Project</h2>
+                <p>Ready to build your dream home or transform your current space? Reach out to our team to schedule an initial consultation.</p>
+                
+                <ul class="contact-details">
+                    <li>
+                        <strong>Address:</strong>
+                        <span>800 W Main St, Suite 1400<br>Boise, ID 83702</span>
+                    </li>
+                    <li>
+                        <strong>Phone:</strong>
+                        <span>(208) 555-0198</span>
+                    </li>
+                    <li>
+                        <strong>Email:</strong>
+                        <span>hello@elementbuildhome.com</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="contact-form-wrapper">
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="project_type">Project Type</label>
+                        <select id="project_type" name="project_type">
+                            <option value="new_build">Custom New Build</option>
+                            <option value="remodel">Major Remodel</option>
+                            <option value="other">Other Inquiry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message Details</label>
+                        <textarea id="message" name="message" rows="4" required placeholder="Tell us about your timeline and vision..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-      // Cards Reveal Animations
-      const cards = gsap.utils.toArray('.card');
-      cards.forEach((card) => {
-        gsap.from(card, {
-          y: 60,
-          opacity: 0,
-          duration: 1.2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-            toggleActions: "play none none reverse"
-          }
-        });
-      });
-
-      // Parallax Image Effect
-      const images = gsap.utils.toArray('.img-wrapper img');
-      images.forEach((img) => {
-        gsap.to(img, {
-          yPercent: 20,
-          ease: "none",
-          scrollTrigger: {
-            trigger: img.parentElement,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true
-          }
-        });
-      });
-    });
-  </script>
-</body>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="logo">
+                    <a href="#">Element<span>.</span></a>
+                </div>
+                <p>Crafting Idaho's Finest Homes.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Expertise</a></li>
+                    <li><a href="#portfolio">Our Work</a></li>
+                    <li><a href="#about">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram">IG</a>
+                    <a href="#" aria-label="Houzz">HZ</a>
+                    <a href="#" aria-label="Facebook">FB</a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Element Building Co. All Rights Reserved.</p>
+                <p>Designed for Elementor.</p>
+            </div>
+        </div>
+    </footer>
 </html>
+
+
+
+
