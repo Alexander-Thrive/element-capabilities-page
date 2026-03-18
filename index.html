@@ -1,1054 +1,1269 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Element Building Co | Custom Homes & Remodels in Boise, Idaho</title>
-    <meta name="description" content="Element Building Co specializes in high-end custom homes, comprehensive remodels, and architectural builds in Boise, Idaho and the Treasure Valley.">
-    
-    <!-- Google Fonts: Outfit for Headers, Lora for body text (elegant pairing) -->
+    <title>Element Building Co. | Custom Homes Crafted with Purpose</title>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Custom CSS -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+        rel="stylesheet">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
     <style>
-/* 
-  Element Building Co - Base Styles 
-  CSS organized to mirror Elementor's UI structure
-*/
-
-/* --- 1. Global Variables (Elementor Global Settings) --- */
-:root {
-  /* Colors */
-  --color-bg: #FDFBF7; /* Warm off-white */
-  --color-text-main: #1A1A1A; /* Soft black/charcoal */
-  --color-text-muted: #5A5A5A;
-  --color-accent: #8C6239; /* Warm Wood/Bronze */
-  --color-accent-hover: #75512e;
-  --color-white: #FFFFFF;
-  --color-border: #E5E5E5;
-
-  /* Typography */
-  --font-heading: 'Outfit', sans-serif;
-  --font-body: 'Lora', serif;
-
-  /* Spacing (mimicking Elementor padding/margin controls) */
-  --spacing-section: 100px;
-  --spacing-container: 2rem;
-  
-  /* Layout Transitions */
-  --transition-speed: 0.3s;
-  --transition-ease: ease-in-out;
-}
-
-/* --- 2. CSS Reset & Base Rules --- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-}
-
-body {
-  font-family: var(--font-body);
-  color: var(--color-text-main);
-  background-color: var(--color-bg);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Typography Defaults */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 500;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-  color: var(--color-text-main);
-}
-
-h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600; letter-spacing: -0.02em; }
-h2 { font-size: clamp(2rem, 4vw, 3rem); }
-h3 { font-size: 1.5rem; }
-
-p {
-  margin-bottom: 1rem;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-  transition: color var(--transition-speed) var(--transition-ease);
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* --- 3. Utility Classes (Elementor Containers) --- */
-.container {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-container);
-}
-
-.section {
-  padding: var(--spacing-section) 0;
-}
-
-/* Buttons (Elementor Button Widget) */
-.btn {
-  display: inline-block;
-  padding: 14px 32px;
-  font-family: var(--font-heading);
-  font-weight: 500;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-radius: 2px;
-  transition: all var(--transition-speed) var(--transition-ease);
-  cursor: pointer;
-  border: none;
-}
-
-.btn-primary {
-  background-color: var(--color-accent);
-  color: var(--color-white);
-}
-
-.btn-primary:hover {
-  background-color: var(--color-accent-hover);
-  transform: translateY(-2px);
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: var(--color-white);
-  border: 1px solid var(--color-white);
-}
-
-.btn-secondary:hover {
-  background-color: var(--color-white);
-  color: var(--color-text-main);
-}
-
-/* --- 4. Component Styles --- */
-
-/* Header */
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: transparent;
-  padding: 20px 0;
-  z-index: 1000;
-  transition: background-color 0.4s ease, padding 0.4s ease;
-}
-
-.site-header.scrolled {
-  background-color: rgba(253, 251, 247, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 15px 0;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-}
-
-.site-header.scrolled .logo a,
-.site-header.scrolled .nav-links a {
-  color: var(--color-text-main);
-}
-
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo a {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--color-white);
-}
-
-.logo span {
-  color: var(--color-accent);
-}
-
-.main-nav {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
-}
-
-.nav-links a {
-  font-family: var(--font-heading);
-  font-weight: 500;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-white);
-}
-
-.nav-links a:hover {
-  color: var(--color-accent);
-}
-
-.mobile-menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-}
-
-/* Hero Section */
-.hero {
-  position: relative;
-  height: 100vh;
-  min-height: 600px;
-  display: flex;
-  align-items: center;
-  background-image: url('../https://element-building-co-2026.netlify.app/assets/images/hero-bg-placeholder.png'); /* We will generate this */
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed; /* Parallax effect */
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
-}
-
-.hero-container {
-  position: relative;
-  z-index: 2;
-}
-
-.hero-content {
-  max-width: 600px;
-  color: var(--color-white);
-}
-
-.hero-content h1 {
-  color: var(--color-white);
-  margin-bottom: 1.5rem;
-}
-
-.hero-content p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-}
-
-/* Section Headers */
-.section-header {
-  margin-bottom: 4rem;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.subtitle {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-accent);
-  margin-bottom: 0.5rem;
-}
-
-.section-header h2 {
-  font-size: clamp(2rem, 3vw, 2.5rem);
-  font-weight: 600;
-  color: var(--color-text-main);
-}
-
-/* Services Section */
-.services-section {
-  background-color: var(--color-white);
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.service-box {
-  padding: 3rem 2rem;
-  background-color: var(--color-bg);
-  border-radius: 4px;
-  transition: transform var(--transition-speed) var(--transition-ease), box-shadow var(--transition-speed) var(--transition-ease);
-  border: 1px solid transparent;
-}
-
-.service-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  border-color: var(--color-border);
-}
-
-.service-icon {
-  margin-bottom: 1.5rem;
-  color: var(--color-accent);
-}
-
-.service-box h3 {
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-}
-
-.service-box p {
-  color: var(--color-text-muted);
-  font-size: 0.95rem;
-}
-
-/* Portfolio Section */
-.portfolio-section {
-  background-color: var(--color-bg);
-}
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 1.5rem;
-}
-
-.portfolio-item {
-  position: relative;
-  overflow: hidden;
-  border-radius: 4px;
-}
-
-.portfolio-img {
-  aspect-ratio: 4/3;
-  overflow: hidden;
-}
-
-.portfolio-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.portfolio-item:hover .portfolio-img img {
-  transform: scale(1.05);
-}
-
-.portfolio-desc {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 2rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-  color: var(--color-white);
-  transform: translateY(20px);
-  opacity: 0;
-  transition: all 0.4s ease;
-}
-
-.portfolio-item:hover .portfolio-desc {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.portfolio-desc h3 {
-  color: var(--color-white);
-  margin-bottom: 0.2rem;
-  font-size: 1.25rem;
-}
-
-.portfolio-desc p {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-white);
-  opacity: 0.8;
-  margin-bottom: 0;
-}
-
-/* About Section */
-.about-section {
-  background-color: var(--color-white);
-  overflow: hidden; /* For badge positioning */
-}
-
-.about-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.about-content h2 {
-  margin-bottom: 1.5rem;
-}
-
-.about-content p {
-  color: var(--color-text-muted);
-  font-size: 1.05rem;
-  margin-bottom: 1.5rem;
-}
-
-.trust-stats {
-  display: flex;
-  gap: 3rem;
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--color-border);
-}
-
-.stat-num {
-  font-family: var(--font-heading);
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--color-accent);
-  display: block;
-  line-height: 1;
-  margin-bottom: 0.5rem;
-}
-
-.stat-label {
-  font-family: var(--font-heading);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--color-text-main);
-}
-
-.about-image-wrapper {
-  position: relative;
-  padding-right: 2rem;
-  padding-bottom: 2rem;
-}
-
-.about-image {
-  border-radius: 4px;
-  box-shadow: -20px 20px 0 var(--color-bg); /* Simple CSS shadow easily done in Elementor box shadow */
-}
-
-.experience-badge {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: var(--color-accent);
-  color: var(--color-white);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-}
-
-.experience-badge span {
-  font-family: var(--font-body);
-  font-style: italic;
-  font-size: 0.9rem;
-}
-
-.experience-badge strong {
-  font-family: var(--font-heading);
-  font-size: 1.4rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-/* Contact Section */
-.contact-section {
-  background-color: var(--color-bg);
-  padding: 6rem 0; /* extra padding to anchor footer */
-}
-
-.contact-container {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 4rem;
-}
-
-.contact-info p {
-  color: var(--color-text-muted);
-  margin-bottom: 3rem;
-}
-
-.contact-details {
-  list-style: none;
-}
-
-.contact-details li {
-  margin-bottom: 1.5rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.contact-details strong {
-  font-family: var(--font-heading);
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-accent);
-  margin-bottom: 0.3rem;
-}
-
-.contact-details span {
-  font-size: 1.1rem;
-  color: var(--color-text-main);
-}
-
-.contact-form-wrapper {
-  background-color: var(--color-white);
-  padding: 3rem;
-  border-radius: 4px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.03);
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-group label {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid var(--color-border);
-  border-radius: 2px;
-  font-family: var(--font-body);
-  font-size: 1rem;
-  color: var(--color-text-main);
-  background-color: var(--color-bg);
-  transition: border-color var(--transition-speed);
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--color-accent);
-}
-
-.submit-btn {
-  width: 100%;
-}
-
-/* Footer Section */
-.site-footer {
-  background-color: var(--color-text-main);
-  color: var(--color-white);
-  padding: 4rem 0 2rem;
-}
-
-.footer-container {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 3rem;
-  margin-bottom: 3rem;
-}
-
-.footer-brand p {
-  margin-top: 1rem;
-  color: var(--color-text-muted);
-  color: rgba(255,255,255,0.6);
-}
-
-.footer-links h4,
-.footer-social h4 {
-  color: var(--color-white);
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
-}
-
-.footer-links ul {
-  list-style: none;
-}
-
-.footer-links li {
-  margin-bottom: 0.8rem;
-}
-
-.footer-links a {
-  color: rgba(255,255,255,0.7);
-}
-
-.footer-links a:hover {
-  color: var(--color-accent);
-}
-
-.social-icons {
-  display: flex;
-  gap: 1rem;
-}
-
-.social-icons a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 50%;
-  color: var(--color-white);
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 0.85rem;
-  transition: all var(--transition-speed);
-}
-
-.social-icons a:hover {
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
-}
-
-.footer-bottom {
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.5);
-}
-
-/* Animations (Mimicking Elementor Motion Effects) */
-.fade-in-up {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 1s ease forwards;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* --- Responsive Adjustments --- */
-@media (max-width: 992px) {
-  .about-container {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  
-  .about-image-wrapper {
-    order: -1; /* image on top for tablet/mobile */
-    padding-right: 0;
-  }
-  
-  .experience-badge {
-    padding: 1.5rem;
-  }
-  
-  .contact-container {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  
-  .footer-container {
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-  
-  .nav-links, .main-nav .btn {
-    display: none; /* Mobile menu toggle logic needed */
-  }
-  
-  .mobile-menu-toggle {
-    display: block;
-  }
-  
-  .hamburger {
-    display: block;
-    width: 25px;
-    height: 2px;
-    background-color: var(--color-white);
-    position: relative;
-    transition: background-color 0.3s;
-  }
-  
-  .hamburger::before, .hamburger::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background-color: var(--color-white);
-    left: 0;
-    transition: transform 0.3s, top 0.3s;
-  }
-  
-  .hamburger::before { top: -8px; }
-  .hamburger::after { top: 8px; }
-  
-  .site-header.scrolled .hamburger,
-  .site-header.scrolled .hamburger::before,
-  .site-header.scrolled .hamburger::after {
-    background-color: var(--color-text-main);
-  }
-}
-
-@media (max-width: 768px) {
-  :root {
-    --spacing-section: 60px;
-  }
-  
-  h1 { font-size: 2.5rem; }
-  h2 { font-size: 2rem; }
-  
-  .hero-actions {
-    flex-direction: column;
-  }
-  
-  .btn {
-    text-align: center;
-  }
-  
-  .trust-stats {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .footer-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .footer-bottom {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
-}
-
-
-
-
+        :root {
+            /* Core Backgrounds */
+            --bg-primary: #F7F6F3;
+            --bg-secondary: #EBEAE6;
+            --surface-light: #FFFFFF;
+
+            /* Updated Brand Colors per Request */
+            --color-dark-blue: #011055;
+            --color-green: #6eb302;
+
+            --surface-dark: var(--color-dark-blue);
+            --surface-darker: #010a33;
+
+            /* Typography Colors */
+            --text-primary: var(--color-dark-blue);
+            --text-secondary: #5C5C5C;
+            --text-light: #F0F0F0;
+            --text-muted: #A0A0A0;
+
+            /* Accents & Borders */
+            --accent-color: var(--color-green);
+            --border-light: #D5D4D0;
+            --border-dark: rgba(1, 16, 85, 0.2);
+
+            /* Typography */
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+
+            /* Layout Spacing */
+            --space-xs: 1rem;
+            --space-sm: 2rem;
+            --space-md: 4rem;
+            --space-lg: 8rem;
+            --space-xl: 12rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .serif {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img,
+        video {
+            max-width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 5vw;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 1.25rem 2.5rem;
+            border: 1px solid var(--text-primary);
+            color: var(--text-primary);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--text-primary);
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: var(--bg-primary);
+            border-color: var(--text-primary);
+        }
+
+        .btn:hover::before {
+            transform: translateY(0);
+        }
+
+        .btn-light {
+            border-color: var(--text-light);
+            color: var(--text-light);
+        }
+
+        .btn-light::before {
+            background: var(--text-light);
+        }
+
+        .btn-light:hover {
+            color: var(--surface-dark);
+            border-color: var(--text-light);
+        }
+
+        /* Section 1 - Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 5vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            color: var(--text-light);
+            transition: padding 0.4s ease, background 0.4s ease;
+        }
+
+        header.scrolled {
+            padding: 1.5rem 5vw;
+            background: rgba(247, 246, 243, 0.95);
+            backdrop-filter: blur(10px);
+            color: var(--text-primary);
+            border-bottom: 1px solid rgba(1, 16, 85, 0.1);
+        }
+
+        .logo a {
+            display: inline-block;
+        }
+
+        .logo img {
+            height: 48px;
+            width: auto;
+            transition: opacity 0.3s;
+            display: block;
+        }
+
+        .logo .logo-dark {
+            display: none;
+        }
+
+        header.scrolled .logo .logo-white {
+            display: none;
+        }
+
+        header.scrolled .logo .logo-dark {
+            display: block;
+        }
+
+        nav ul {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            position: relative;
+            color: inherit;
+        }
+
+        nav li:not(.nav-cta-item) a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        nav li:not(.nav-cta-item) a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta-item {
+            margin-left: 1rem;
+        }
+
+        .nav-cta {
+            padding: 0.8rem 1.5rem !important;
+            font-size: 0.75rem !important;
+            border-width: 1px;
+        }
+
+        header.scrolled .nav-cta {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+        }
+
+        header.scrolled .nav-cta::before {
+            background: var(--text-primary);
+        }
+
+        header.scrolled .nav-cta:hover {
+            color: var(--surface-light);
+            border-color: var(--text-primary);
+        }
+
+        /* Section 2 - Hero */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--surface-dark);
+            color: var(--text-light);
+            overflow: hidden;
+        }
+
+        .hero-video-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .hero-video-wrapper iframe {
+            width: 100vw;
+            height: 56.25vw;
+            min-height: 100vh;
+            min-width: 177.77vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--surface-darker);
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: left;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 4rem;
+        }
+
+        .hero h1 {
+            color: var(--text-light);
+            font-size: clamp(3rem, 7vw, 6.5rem);
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            max-width: 1000px;
+        }
+
+        .hero-content .gsap-reveal {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        /* Section 3 - Trust Pillars */
+        .trust-pillars {
+            padding: var(--space-xl) 0;
+            background: var(--bg-primary);
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .pillar {
+            grid-column: span 3;
+            padding-top: 2rem;
+            position: relative;
+        }
+
+        .pillar span.number {
+            display: block;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .pillar h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-sans);
+            font-weight: 500;
+        }
+
+        .pillar p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Section 4 - Portfolio / Inspiration */
+        .portfolio {
+            padding: var(--space-xl) 0;
+            background: var(--bg-secondary);
+        }
+
+        .portfolio-layout {
+            display: grid;
+            grid-template-columns: 5fr 7fr;
+            gap: var(--space-lg);
+            align-items: center;
+        }
+
+        .portfolio-text h2 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            margin-bottom: 2rem;
+        }
+
+        .portfolio-text p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 400px;
+        }
+
+        .portfolio-images {
+            position: relative;
+            height: 80vh;
+        }
+
+        .img-main {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 85%;
+            height: 90%;
+            background: url('../images/Commitment%20to%20Thoughtful%20Design%201.webp') center/cover;
+            z-index: 1;
+        }
+
+        .img-overlap {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            height: 60%;
+            background: url('../images/Commitment%20to%20Thoughtful%20Design%202.webp') center/cover;
+            z-index: 2;
+            border: 15px solid var(--bg-secondary);
+            transform: translateY(50px);
+        }
+
+        /* Section 5 - About Element */
+        .about {
+            padding: var(--space-xl) 0;
+            position: relative;
+            background: var(--surface-dark);
+            color: var(--text-light);
+            overflow: hidden;
+        }
+
+        .about-bg {
+            position: absolute;
+            top: -20%;
+            left: 0;
+            width: 100%;
+            height: 140%;
+            background: url('https://images.unsplash.com/photo-1616047006789-b7af5afb8c20?q=80&w=1760&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover;
+            opacity: 0.4;
+            z-index: 0;
+            mix-blend-mode: overlay;
+        }
+
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about h2 {
+            color: var(--text-light);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 2.5rem;
+        }
+
+        .about p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            font-family: var(--font-serif);
+            font-style: italic;
+        }
+
+        /* Section 6 - The Building Process */
+        .process {
+            padding: var(--space-xl) 0;
+            background: var(--bg-primary);
+        }
+
+        .process-header {
+            margin-bottom: var(--space-lg);
+        }
+
+        .process-header h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+        }
+
+        .process-list {
+            border-top: 1px solid var(--border-light);
+        }
+
+        .process-item {
+            display: grid;
+            grid-template-columns: 1fr 3fr 4fr;
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border-light);
+            align-items: start;
+        }
+
+        .process-num {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            letter-spacing: 0.05em;
+        }
+
+        .process-item h3 {
+            font-size: 2rem;
+            font-family: var(--font-serif);
+        }
+
+        .process-item p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 600px;
+        }
+
+        /* Section 7 - Why Choose Us */
+        .why-us {
+            padding: var(--space-xl) 0;
+            position: relative;
+            background: var(--bg-secondary);
+            overflow: hidden;
+        }
+
+        .why-us-bg {
+            position: absolute;
+            top: -40%;
+            left: 0;
+            width: 100%;
+            height: 140%;
+            background: url('../images/Why%20Choose%20Us%20BG.webp') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+            mix-blend-mode: multiply;
+        }
+
+        .why-us .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .why-layout {
+            display: grid;
+            grid-template-columns: 4fr 8fr;
+            gap: var(--space-lg);
+        }
+
+        .why-sticky {
+            position: sticky;
+            top: 15vh;
+        }
+
+        .why-sticky h2 {
+            font-size: clamp(3rem, 5vw, 4rem);
+        }
+
+        .why-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+        }
+
+        .why-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .why-icon {
+            color: var(--accent-color);
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .why-content h3 {
+            font-family: var(--font-sans);
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+
+        .why-content p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin-bottom: 0;
+        }
+
+        /* Section 8 - Reviews */
+        .reviews {
+            padding: var(--space-xl) 0;
+            background: var(--surface-light);
+            text-align: center;
+        }
+
+        .review-card {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .stars {
+            font-size: 1.5rem;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+        }
+
+        .review-card h3 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-style: italic;
+            margin-bottom: 3rem;
+            line-height: 1.4;
+            color: var(--text-primary);
+        }
+
+        .review-card p {
+            text-transform: uppercase;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        /* Dual Section (9 & 10) */
+        .dual-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* Section 9 - Service Area */
+        .service-area {
+            background: var(--surface-darker);
+            color: var(--text-light);
+            padding: var(--space-lg) 5vw;
+        }
+
+        .service-area h2 {
+            color: var(--text-light);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            font-family: var(--font-sans);
+            color: var(--text-muted);
+        }
+
+        /* Section 10 - Build Cost Guide */
+        .cost-guide {
+            background: var(--surface-dark);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            padding: var(--space-lg) 5vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cost-guide h2 {
+            color: var(--text-light);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cost-guide p {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 500px;
+            font-size: 1.1rem;
+        }
+
+        .cost-guide .btn-light {
+            align-self: flex-start;
+        }
+
+        /* Section 11 - Final CTA */
+        .final-cta {
+            position: relative;
+            padding: var(--space-xl) 0;
+            background: var(--surface-dark);
+            color: var(--text-light);
+            text-align: center;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .cta-bg {
+            position: absolute;
+            top: -20%;
+            left: 0;
+            width: 100%;
+            height: 140%;
+            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            opacity: 0.25;
+            z-index: 0;
+        }
+
+        .final-cta .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .final-cta h2 {
+            color: var(--text-light);
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Section 12 - Footer */
+        footer {
+            background: var(--surface-darker);
+            color: var(--text-light);
+            padding: var(--space-md) 0 2rem 0;
+            font-family: var(--font-sans);
+        }
+
+        .footer-layout {
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1.5fr 1fr;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-logo img {
+            height: 50px;
+            width: auto;
+            opacity: 0.9;
+        }
+
+        .footer-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .footer-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .footer-link svg {
+            color: var(--accent-color);
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-link:hover svg {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        /* Media Queries */
+        @media (max-width: 1024px) {
+            .pillars-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+
+            .portfolio-layout,
+            .why-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .why-sticky {
+                position: relative;
+                top: 0;
+                margin-bottom: 3rem;
+            }
+
+            .portfolio-images {
+                height: 60vh;
+            }
+
+            header nav {
+                display: none;
+            }
+
+            .footer-layout {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pillar {
+                grid-column: span 1;
+                border-top: 1px solid var(--border-light);
+            }
+
+            .process-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .process-num {
+                margin-bottom: 0;
+            }
+
+            .why-item {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .dual-section {
+                grid-template-columns: 1fr;
+            }
+
+            .cost-guide {
+                border-left: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .footer-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .img-overlap {
+                border-width: 5px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
-    <!-- Header Section -->
+    <!-- Section 1 - Header -->
     <header class="site-header">
-        <div class="container header-container">
-            <div class="logo">
-                <a href="#">Element<span>.</span></a>
-            </div>
-            <nav class="main-nav">
-                <ul class="nav-links">
-                    <li><a href="#services">Expertise</a></li>
-                    <li><a href="#portfolio">Our Work</a></li>
-                    <li><a href="#about">About</a></li>
-                </ul>
-                <a href="#contact" class="btn btn-primary">Contact Us</a>
-            </nav>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu">
-                <span class="hamburger"></span>
-            </button>
+        <div class="logo">
+            <a href="#">
+                <img src="../logo/element5-white-final.png" alt="Element Building Co." class="logo-white">
+                <img src="../logo/element5-final.png" alt="Element Building Co." class="logo-dark">
+            </a>
         </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#portfolio">Inspiration</a></li>
+                <li><a href="#why-us">Why Element</a></li>
+                <li><a href="#cost-guide">Build Cost Guide</a></li>
+                <li class="nav-cta-item"><a href="#contact" class="btn btn-light nav-cta">Build My Element</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-overlay"></div>
-        <div class="container hero-container">
-            <div class="hero-content fade-in-up">
-                <h1>Crafting Idaho's Finest Homes.</h1>
-                <p>Exceptional custom builds and visionary renovations tailored to the Treasure Valley lifestyle.</p>
-                <div class="hero-actions">
-                    <a href="#portfolio" class="btn btn-primary">View Our Projects</a>
-                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
-                </div>
+    <!-- Section 2 - Hero -->
+    <section id="home" class="hero">
+        <div class="hero-video-wrapper">
+            <div class="hero-overlay"></div>
+            <iframe
+                src="https://player.vimeo.com/video/1174863759?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
+                frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+        <div class="container hero-content">
+            <h1 class="gsap-reveal-text">Custom Homes Crafted with Purpose</h1>
+            <div class="gsap-fade-up" style="opacity: 1; visibility: visible;">
+                <a href="#contact" class="btn btn-light">Build my Element</a>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="section services-section" id="services">
+    <!-- Section 3 - Trust Pillars -->
+    <section class="trust-pillars">
         <div class="container">
-            <div class="section-header text-center">
-                <span class="subtitle">Our Expertise</span>
-                <h2>What We Build</h2>
-            </div>
-            <div class="services-grid">
-                <!-- Service Box 1 -->
-                <div class="service-box">
-                    <div class="service-icon">
-                        <!-- SVG Placeholder for Elementor Icon -->
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M9 8h1"></path><path d="M9 12h1"></path><path d="M9 16h1"></path><path d="M14 8h1"></path><path d="M14 12h1"></path><path d="M14 16h1"></path><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path></svg>
-                    </div>
-                    <h3>Custom Homes</h3>
-                    <p>From conceptual design to final walkthrough, we build unique architectural masterpieces that reflect your vision and the natural beauty of Idaho.</p>
+            <div class="pillars-grid">
+                <div class="pillar gsap-fade-up">
+                    <span class="number">01</span>
+                    <h3>Personalized Design</h3>
+                    <p>Your home should reflect your lifestyle, taste, and long-term needs.</p>
                 </div>
-                <!-- Service Box 2 -->
-                <div class="service-box">
-                    <div class="service-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-                    </div>
-                    <h3>Luxury Remodels</h3>
-                    <p>Transform your existing space. We specialize in comprehensive structural and aesthetic renovations that breathe new life into older homes.</p>
+                <div class="pillar gsap-fade-up" style="transition-delay: 0.1s">
+                    <span class="number">02</span>
+                    <h3>Transparent Pricing</h3>
+                    <p>Clear budgets and planning keep your project predictable.</p>
                 </div>
-                <!-- Service Box 3 -->
-                <div class="service-box">
-                    <div class="service-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 19 8.4 19 22 5 22 5 8.4 12 2"></polygon><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                    </div>
-                    <h3>Architectural Design</h3>
-                    <p>Partnering with the region's best architects, we ensure seamless transition from blueprints to framing, optimizing for both beauty and structural integrity.</p>
+                <div class="pillar gsap-fade-up" style="transition-delay: 0.2s">
+                    <span class="number">03</span>
+                    <h3>Consistent Communication</h3>
+                    <p>You’ll always know what’s happening during your build.</p>
+                </div>
+                <div class="pillar gsap-fade-up" style="transition-delay: 0.3s">
+                    <span class="number">04</span>
+                    <h3>Exceptional Craftsmanship</h3>
+                    <p>Skilled trades and quality materials in every home.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section class="section portfolio-section" id="portfolio">
+    <!-- Section 4 - Portfolio / Inspiration -->
+    <section id="portfolio" class="portfolio">
+        <div class="container portfolio-layout">
+            <div class="portfolio-text gsap-fade-right">
+                <h2>Commitment to<br>Thoughtful Design</h2>
+                <p>Explore custom homes that highlight a commitment to thoughtful design, quality craftsmanship, and
+                    beautiful, livable spaces.</p>
+                <a href="#portfolio" class="btn">View Inspiration</a>
+            </div>
+            <div class="portfolio-images gsap-fade-left">
+                <div class="img-main"></div>
+                <div class="img-overlap gsap-parallax"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5 - About Element -->
+    <section class="about">
+        <div class="about-bg gsap-parallax-bg"></div>
+        <div class="container about-layout gsap-fade-up">
+            <h2>A Team Focused on Quality and Experience</h2>
+            <p>We build homes that are designed to last and crafted with attention to detail. Our team works closely
+                with homeowners to create spaces that reflect their vision while delivering a smooth and transparent
+                building experience.</p>
+            <div>
+                <a href="#about" class="btn btn-light">Learn more about Element</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6 - The Building Process -->
+    <section id="process" class="process">
         <div class="container">
-            <div class="section-header text-center">
-                <span class="subtitle">Latest Work</span>
-                <h2>Featured Projects</h2>
+            <div class="process-header gsap-fade-up">
+                <h2>The Building Process</h2>
             </div>
-            <div class="portfolio-grid">
-                <!-- Project 1 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-img">
-                        <img src="https://element-building-co-2026.netlify.app/assets/images/portfolio-1.png" alt="Modern Kitchen Remodel">
-                    </div>
-                    <div class="portfolio-desc">
-                        <h3>The Foothills Kitchen</h3>
-                        <p>Interior Remodel</p>
-                    </div>
+            <div class="process-list">
+                <div class="process-item gsap-fade-up">
+                    <div class="process-num">STEP 1</div>
+                    <h3>Consultation</h3>
+                    <p>Discuss goals, budget, land, and vision. For an overview of typical pricing, view our Build Cost
+                        Guide.</p>
                 </div>
-                <!-- Project 2 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-img">
-                        <img src="https://element-building-co-2026.netlify.app/assets/images/portfolio-2.png" alt="Mountain Modern Living Room">
-                    </div>
-                    <div class="portfolio-desc">
-                        <h3>Table Rock Residence</h3>
-                        <p>Custom New Build</p>
-                    </div>
+                <div class="process-item gsap-fade-up">
+                    <div class="process-num">STEP 2</div>
+                    <h3>Financing</h3>
+                    <p>Discuss project financing requirements.</p>
                 </div>
-                <!-- Project 3 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-img">
-                        <img src="https://element-building-co-2026.netlify.app/assets/images/portfolio-3.png" alt="Custom Timber Frame Exterior">
-                    </div>
-                    <div class="portfolio-desc">
-                        <h3>North End Retreat</h3>
-                        <p>Historic Renovation & Addition</p>
-                    </div>
+                <div class="process-item gsap-fade-up">
+                    <div class="process-num">STEP 3</div>
+                    <h3>Design & Planning</h3>
+                    <p>Architectural plans and selections.</p>
                 </div>
-            </div>
-            <div class="text-center" style="margin-top: 3rem;">
-                <a href="#" class="btn btn-secondary" style="border-color: var(--color-text-main); color: var(--color-text-main);">View Full Portfolio</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="section about-section" id="about">
-        <div class="container about-container">
-            <div class="about-content">
-                <span class="subtitle">Who We Are</span>
-                <h2>Building Legacies in the Treasure Valley</h2>
-                <p>At Element Building Co, we don't just build houses; we craft environments that elevate the everyday. Based in Boise, Idaho, our team brings decades of combined experience in luxury home building and architectural renovations.</p>
-                <p>We pride ourselves on transparent communication, impeccable craftsmanship, and a deep respect for the natural beauty of the Pacific Northwest. Every project we undertake is an opportunity to push the boundaries of design while ensuring timeless structural integrity.</p>
-                <div class="trust-stats">
-                    <div class="stat">
-                        <span class="stat-num">15+</span>
-                        <span class="stat-label">Years Experience</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-num">100%</span>
-                        <span class="stat-label">Client Satisfaction</span>
-                    </div>
+                <div class="process-item gsap-fade-up">
+                    <div class="process-num">STEP 4</div>
+                    <h3>Pre-Construction</h3>
+                    <p>Finalize budget, schedule, and permit process.</p>
                 </div>
-            </div>
-            <div class="about-image-wrapper fade-in-up">
-                <img src="https://element-building-co-2026.netlify.app/assets/images/about.png" alt="Element Building Co - Modern Entryway" class="about-image">
-                <div class="experience-badge">
-                    <span>Award Winning</span>
-                    <strong>Builder</strong>
+                <div class="process-item gsap-fade-up">
+                    <div class="process-num">STEP 5</div>
+                    <h3>Construction</h3>
+                    <p>Professional onsite management and project milestone updates.</p>
+                </div>
+                <div class="process-item gsap-fade-up">
+                    <div class="process-num">STEP 6</div>
+                    <h3>Completion</h3>
+                    <p>Walkthrough, touch-ups and move-in.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="section contact-section" id="contact">
-        <div class="container contact-container">
-            <div class="contact-info">
-                <span class="subtitle">Get in Touch</span>
-                <h2>Start Your Project</h2>
-                <p>Ready to build your dream home or transform your current space? Reach out to our team to schedule an initial consultation.</p>
-                
-                <ul class="contact-details">
-                    <li>
-                        <strong>Address:</strong>
-                        <span>800 W Main St, Suite 1400<br>Boise, ID 83702</span>
-                    </li>
-                    <li>
-                        <strong>Phone:</strong>
-                        <span>(208) 555-0198</span>
-                    </li>
-                    <li>
-                        <strong>Email:</strong>
-                        <span>hello@elementbuildhome.com</span>
-                    </li>
-                </ul>
+    <!-- Section 7 - Why Choose Us -->
+    <section id="why-us" class="why-us">
+        <div class="why-us-bg gsap-parallax-bg"></div>
+        <div class="container why-layout">
+            <div class="why-sticky gsap-fade-right">
+                <h2>Why Choose Us</h2>
             </div>
-            <div class="contact-form-wrapper">
-                <form class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" required placeholder="John Doe">
+            <div class="why-list gsap-fade-left">
+                <!-- Highlight 1 -->
+                <div class="why-item">
+                    <div class="why-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M8 3l4 8 5-5 5 15H2L8 3z" />
+                        </svg>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="john@example.com">
+                    <div class="why-content">
+                        <h3>Local Expertise</h3>
+                        <p>A 4th generation Idahoan, born and raised in the Treasure Valley.</p>
                     </div>
-                    <div class="form-group">
-                        <label for="project_type">Project Type</label>
-                        <select id="project_type" name="project_type">
-                            <option value="new_build">Custom New Build</option>
-                            <option value="remodel">Major Remodel</option>
-                            <option value="other">Other Inquiry</option>
-                        </select>
+                </div>
+                <!-- Highlight 2 -->
+                <div class="why-item">
+                    <div class="why-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v6l4 2" />
+                        </svg>
                     </div>
-                    <div class="form-group">
-                        <label for="message">Message Details</label>
-                        <textarea id="message" name="message" rows="4" required placeholder="Tell us about your timeline and vision..."></textarea>
+                    <div class="why-content">
+                        <h3>Experience</h3>
+                        <p>23 years of building homes and buying / selling Real Estate in the Treasure Valley.</p>
                     </div>
-                    <button type="submit" class="btn btn-primary submit-btn">Send Message</button>
-                </form>
+                </div>
+                <!-- Highlight 3 -->
+                <div class="why-item">
+                    <div class="why-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M4 21v-7" />
+                            <path d="M4 10V3" />
+                            <path d="M12 21v-9" />
+                            <path d="M12 8V3" />
+                            <path d="M20 21v-5" />
+                            <path d="M20 12V3" />
+                            <path d="M1 14h6" />
+                            <path d="M9 8h6" />
+                            <path d="M17 16h6" />
+                        </svg>
+                    </div>
+                    <div class="why-content">
+                        <h3>Custom Flexibility</h3>
+                        <p>Homes are designed and built for your specific lifestyle.</p>
+                    </div>
+                </div>
+                <!-- Highlight 4 -->
+                <div class="why-item">
+                    <div class="why-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path
+                                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                        </svg>
+                    </div>
+                    <div class="why-content">
+                        <h3>Trusted Trades</h3>
+                        <p>We only work with experienced and reliable craftsmen. We do not cut corners or hire
+                            inexperienced crews to try and save a dollar.</p>
+                    </div>
+                </div>
+                <!-- Highlight 5 -->
+                <div class="why-item">
+                    <div class="why-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M9 11l3 3L22 4" />
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                        </svg>
+                    </div>
+                    <div class="why-content">
+                        <h3>Attention to Detail</h3>
+                        <p>We are on-site daily, so each phase of construction is carefully managed.</p>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Section 8 - Reviews -->
+    <section class="reviews">
+        <div class="container gsap-fade-up">
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <h3>"They made the entire building process smooth and stress-free. The communication and craftsmanship
+                    were outstanding."</h3>
+                <p>— Homeowner</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 9 & 10 - Service Area & Build Cost Guide -->
+    <section class="dual-section">
+        <div class="service-area">
+            <div class="gsap-fade-right">
+                <h2>Service Area</h2>
+                <div class="areas-grid">
+                    <span>Boise</span>
+                    <span>Meridian</span>
+                    <span>Kuna</span>
+                    <span>Eagle</span>
+                    <span>Star</span>
+                    <span>Middleton</span>
+                    <span>Nampa</span>
+                    <span>Caldwell</span>
+                    <span>McCall</span>
+                    <span>Donnelly</span>
+                </div>
+            </div>
+        </div>
+        <div id="cost-guide" class="cost-guide">
+            <div class="gsap-fade-left">
+                <h2>What Does It Cost to Build a Custom Home?</h2>
+                <p>One of the most common questions we hear is how much it costs to build a custom home in the Treasure
+                    Valley. While every project is unique, our cost guide explains the factors that influence pricing
+                    and helps you understand what to expect when planning your custom home.</p>
+                <a href="#guide" class="btn btn-light">View the Build Cost Guide</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 11 - Final Call to Action -->
+    <section id="contact" class="final-cta">
+        <div class="cta-bg gsap-parallax-bg-cta"></div>
+        <div class="container gsap-fade-up">
+            <h2>Ready to Build Your Dream Home?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; color: var(--text-light); opacity: 0.9;">Schedule a
+                consultation and let’s talk about your vision.</p>
+            <a href="#contact" class="btn btn-light">Start Your Project</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container footer-container">
-            <div class="footer-brand">
-                <div class="logo">
-                    <a href="#">Element<span>.</span></a>
-                </div>
-                <p>Crafting Idaho's Finest Homes.</p>
-            </div>
-            <div class="footer-links">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Expertise</a></li>
-                    <li><a href="#portfolio">Our Work</a></li>
-                    <li><a href="#about">About Us</a></li>
-                </ul>
-            </div>
-            <div class="footer-social">
-                <h4>Follow Us</h4>
-                <div class="social-icons">
-                    <a href="#" aria-label="Instagram">IG</a>
-                    <a href="#" aria-label="Houzz">HZ</a>
-                    <a href="#" aria-label="Facebook">FB</a>
-                </div>
-            </div>
-        </div>
+    <footer>
         <div class="container">
+            <div class="footer-layout">
+                <!-- Logo Col -->
+                <div class="footer-logo">
+                    <img src="../logo/element5-white-final.png" alt="Element Building Co.">
+                </div>
+
+                <!-- Contact Links -->
+                <div class="footer-list">
+                    <a href="tel:5555555555" class="footer-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                        (555) 555-5555
+                    </a>
+                    <a href="mailto:info@elementbuilding.co" class="footer-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                        </svg>
+                        info@elementbuilding.co
+                    </a>
+                </div>
+
+                <!-- Social Links -->
+                <div class="footer-list">
+                    <a href="#" class="footer-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                        </svg>
+                        Instagram
+                    </a>
+                    <a href="#" class="footer-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
+                        Facebook
+                    </a>
+                    <a href="#" class="footer-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z" />
+                            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" />
+                        </svg>
+                        YouTube
+                    </a>
+                </div>
+
+                <!-- Spacer for grid mapping safely -->
+                <div></div>
+            </div>
+
             <div class="footer-bottom">
-                <p>&copy; 2026 Element Building Co. All Rights Reserved.</p>
-                <p>Designed for Elementor.</p>
+                <p>&copy; 2026 Element Building Co. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#accessibility">Accessibility Policy</a>
+                </div>
             </div>
         </div>
     </footer>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const header = document.querySelector('.site-header');
-        const mobileToggle = document.querySelector('.mobile-menu-toggle');
-        const nav = document.querySelector('.main-nav');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
 
-        if (mobileToggle && nav) {
-            mobileToggle.addEventListener('click', () => {
-                if(nav.style.display === 'flex') {
-                    nav.style.display = '';
-                    nav.style.flexDirection = '';
-                    nav.style.position = '';
-                    nav.style.backgroundColor = '';
+    <!-- GSAP Animations -->
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const header = document.querySelector('.site-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
                 } else {
-                    nav.style.display = 'flex';
-                    nav.style.flexDirection = 'column';
-                    nav.style.position = 'absolute';
-                    nav.style.top = '100%';
-                    nav.style.left = '0';
-                    nav.style.width = '100%';
-                    nav.style.backgroundColor = 'rgba(253, 251, 247, 0.95)';
-                    nav.style.padding = '2rem';
+                    header.classList.remove('scrolled');
                 }
             });
-        }
-    });
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in-up');
-                observer.unobserve(entry.target);
-            }
+            gsap.from(".hero h1", { y: 50, opacity: 0, duration: 1.2, ease: "power3.out", delay: 0.2 });
+
+            gsap.utils.toArray('.gsap-fade-up').forEach(element => {
+                gsap.from(element, {
+                    y: 40, opacity: 0, duration: 1, ease: "power3.out",
+                    scrollTrigger: { trigger: element, start: "top 85%", toggleActions: "play none none reverse" }
+                });
+            });
+
+            gsap.utils.toArray('.gsap-fade-right').forEach(element => {
+                gsap.from(element, {
+                    x: -40, opacity: 0, duration: 1, ease: "power3.out",
+                    scrollTrigger: { trigger: element, start: "top 85%", toggleActions: "play none none reverse" }
+                });
+            });
+
+            gsap.utils.toArray('.gsap-fade-left').forEach(element => {
+                gsap.from(element, {
+                    x: 40, opacity: 0, duration: 1, ease: "power3.out",
+                    scrollTrigger: { trigger: element, start: "top 85%", toggleActions: "play none none reverse" }
+                });
+            });
+
+            gsap.to(".gsap-parallax", {
+                y: -80, ease: "none",
+                scrollTrigger: { trigger: ".portfolio", start: "top bottom", end: "bottom top", scrub: 1 }
+            });
+
+            // Standard Parallax
+            gsap.to(".gsap-parallax-bg", {
+                yPercent: 20, ease: "none",
+                scrollTrigger: { trigger: ".about, .why-us", start: "top bottom", end: "bottom top", scrub: true }
+            });
+
+            // Final CTA Parallax (more aggressive offset)
+            gsap.to(".gsap-parallax-bg-cta", {
+                yPercent: 20, ease: "none",
+                scrollTrigger: { trigger: ".final-cta", start: "top bottom", end: "bottom top", scrub: true }
+            });
         });
-    });
-
-    document.querySelectorAll('.portfolio-item, .service-box').forEach((el) => {
-        el.style.opacity = '0';
-        observer.observe(el);
-    });
-</script>
+    </script>
 </body>
+
 </html>
-
-
-
-
-
