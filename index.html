@@ -412,20 +412,21 @@
 
         .img-main {
             position: absolute;
-            top: 5%;
+            top: 10%;
             left: 0;
-            width: 50%;
-            height: 85%;
+            width: 55%;
+            height: 80%;
             background: url('images/Commitment%20to%20Thoughtful%20Design%201.webp') center/cover;
             z-index: 1;
+            transform-origin: center;
         }
 
         .img-overlap {
             position: absolute;
             bottom: 0;
             right: 0;
-            width: 40%;
-            height: 45%;
+            width: 45%;
+            height: 55%;
             background: url('images/Commitment%20to%20Thoughtful%20Design%202.webp') center/cover;
             z-index: 3;
             border: 10px solid var(--bg-secondary);
@@ -435,8 +436,8 @@
             position: absolute;
             top: 0;
             right: 5%;
-            width: 35%;
-            height: 45%;
+            width: 40%;
+            height: 50%;
             background: url('https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80') center/cover;
             z-index: 2;
             border: 10px solid var(--bg-secondary);
@@ -1281,8 +1282,8 @@
             });
 
             gsap.to(".gsap-parallax", {
-                y: -80, ease: "none",
-                scrollTrigger: { trigger: ".portfolio", start: "top bottom", end: "bottom top", scrub: 1 }
+                y: -50, ease: "power1.out",
+                scrollTrigger: { trigger: ".portfolio", start: "top bottom", end: "bottom top", scrub: 1.5 }
             });
 
             // Standard Parallax
